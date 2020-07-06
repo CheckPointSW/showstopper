@@ -19,8 +19,8 @@ How to install and use the tool, and contribute your findings in the [documentat
 * 32-Bit debuggers (OllyDbg, x32dbg, WinDbg, etc.)
 
 ## References
-* [P. Ferrie. The “Ultimate”Anti-Debugging Reference](http://pferrie.host22.com/papers/antidebug.pdf)
+* [P. Ferrie. The “Ultimate”Anti-Debugging Reference](http://pferrie.epizy.com/papers/antidebug.pdf)
 * [N. Falliere. Windows Anti-Debug Reference](https://www.symantec.com/connect/articles/windows-anti-debug-reference)
-* [J. Jackson. An Anti-Reverse Engineering Guide](https://tuts4you.com/download/2516/)
+* [J. Jackson. An Anti-Reverse Engineering Guide](https://forum.tuts4you.com/files/file/1218-anti-reverse-engineering-guide/)
 * [Anti Debugging Protection Techniques with Examples](https://www.apriorit.com/dev-blog/367-anti-reverse-engineering-protection-techniques-to-use-before-releasing-software)
 * [simpliFiRE.AntiRE](https://bitbucket.org/fkie_cd_dare/simplifire.antire/src/master/)
