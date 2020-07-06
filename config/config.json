@@ -1,0 +1,370 @@
+[
+	{
+		"name": "Debug flags",
+		"subgroups": [
+			{
+				"name": "Using Win32 API",
+				"subgroups": [
+					{
+						"name": "IsDebuggerPresent()",
+						"info": "Uses kernel32!IsDebuggerPresent() to detect a debugger."
+					},
+					{
+						"name": "CheckRemoteDebuggerPresent()",
+						"info": "Uses kernel32.dll!CheckRemoteDebuggerPresent() to detect a debugger."
+					},
+					{
+						"name": "ProcessDebugPort",
+						"info": "Queries PROCESSINFOCLASS::ProcessDebugPort value by ntdll.dll!NtQueryInformationProcess()."
+					},
+					{
+						"name": "ProcessDebugFlags",
+						"info": "Queries PROCESSINFOCLASS::ProcessDebugFlags (which representd an inverted value of EPROCESS::NoDebugInherit) value by ntdll.dll!NtQueryInformationProcess()."
+					},
+					{
+						"name": "ProcessDebugObjectHandle",
+						"info": "Queries the kernel objects \"debug object\" in the system by using PROCESSINFOCLASS::ProcessDebugObjectHandle in ntdll.dll!NtQueryInformationProcess()."
+					},
+					{
+						"name": "RtlQueryProcessHeapInformation",
+						"info": "Reads the heap flags of the current process using ntdll!RtlQueryProcessHeapInformation()."
+					},
+					{
+						"name": "RtlQueryProcessDebugInformation",
+						"info": "Reads the heap flags of the current process using ntdll!RtlQueryProcessDebugInformation()."
+					},
+					{
+						"name": "SystemKernelDebuggerInformation",
+						"info": "Queries SYSTEM_KERNEL_DEBUGGER_INFORMATION::KdDebuggerEnabled and SYSTEM_KERNEL_DEBUGGER_INFORMATION::KdDebuggerNotPresent using SystemKernelDebuggerInformation class in ntdll!NtQuerySystemInformation()."
+					}
+				]
+			},
+			{
+				"name": "Manual checks",
+				"subgroups": [
+					{
+						"name": "PEB!BeingDebugged",
+						"info": "Checks BeingDebugged flag of PEB."
+					},
+					{
+						"name": "NtGlobalFlag",
+						"info": "Checks NtGlobalFlag field of PEB. If a debugger is present then the following flags are set: FLG_HEAP_ENABLE_TAIL_CHECK (0x10), FLG_HEAP_ENABLE_FREE_CHECK (0x20) and FLG_HEAP_VALIDATE_PARAMETERS (0x40)."
+					},
+					{
+						"name": "HeapFlags",
+						"info": "Checks that heap flags \"Flags\" and \"ForceFlags\" are not equal to HEAP_GROWABLE (2) and 0 correspondingly."
+					},
+					{
+						"name": "HeapProtection",
+						"info": "Checks if the sequence 0xABABABAB is appended (twice in 32-Bit and 4 times in 64-Bit Windows) at the end of the allocated heap block when HEAP_TAIL_CHECKING_ENABLED flag is set in NtGlobalFlag."
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Handles Validation",
+		"subgroups": [
+			{
+				"name": "OpenProcess",
+				"info": "Tries to use kernel32!OpenProcess() function on the csrss.exe process"
+			},
+			{
+				"name": "CreateFile",
+				"info": "Usues kernel32!CreateFile() to open exclusively the file of current process. If the call fails we can consider that the debugger stored the handle in CREATE_PROCESS_DEBUG_INFO structure when the CREATE_PROCESS_DEBUG_EVENT event occurs and forgot to close it."
+			},
+			{
+				"name": "CloseHandle",
+				"info": "Tries to close an invalid handle by kernel32!CloseHandle() and checks if EXCEPTION_INVALID_HANDLE exception is catched."
+			},
+			{
+				"name": "LoadLibrary",
+				"info": "Uses kernel32!LoadLibrary() to load a file and checks if kernel32!CreateFile() returns INVALID_HANDLE_VALUE. If it's true then probably the debugger stored file handle in LOAD_DLL_DEBUG_INFO structure when the LOAD_DLL_DEBUG_EVENT event occured and forgot to close it."
+			},
+			{
+				"name": "NtQueryObject",
+				"info": "Uses the ntdll!NtQueryObject() function to query for the list of existing kernel objects and searches for \"DebugObject\" in the list."
+			}
+		]
+	},
+	{
+		"name": "Exceptions",
+		"subgroups": [
+			{
+				"name": "UnhandledExceptionFilter",
+				"info": "Registers a custom unhandled exception filter using kernel32!SetUnhandledExceptionFilter() and checks if an unhandled exception is not catched by this filter."
+			},
+			{
+				"name": "RaiseException",
+				"info": "Generates DBG_CONTROL_C exception and checks if the exception handler is not called."
+			},
+			{
+				"name": "VectoredExceptionHandler",
+				"info": "As an example of using Vectored Exception handlers, registers VEH and checks hardware registers in it."
+			}
+		]
+	},
+	{
+		"name": "Timing",
+		"subgroups": [
+			{
+				"name": "RDTSC",
+				"info": "Checks delay after program was started using RDTSC instruction.",
+				"parameters": [
+					{
+						"name": "elapsed",
+						"type": "dword",
+						"value": "1280"
+					}
+				]
+			},
+			{
+				"name": "GetLocalTime",
+				"info": "Checks delay after program was started using kernel32!GetLocalTime()",
+				"parameters": [
+					{
+						"name": "elapsed",
+						"type": "dword",
+						"value": "16777216"
+					}
+				]
+			},
+			{
+				"name": "GetSystemTime",
+				"info": "Checks delay after program was started using kernel32!GetSystemTime().",
+				"parameters": [
+					{
+						"name": "elapsed",
+						"type": "dword",
+						"value": "16777216"
+					}
+				]
+			},
+			{
+				"name": "GetTickCount",
+				"info": "Checks delay after program was started using kernel32!GetTickCount().",
+				"parameters": [
+					{
+						"name": "elapsed",
+						"type": "dword",
+						"value": "16777216"
+					}
+				]
+			},
+			{
+				"name": "QueryPerformanceCounter",
+				"info": "Checks delay after program was started using kernel32!QueryPerformanceCounter().",
+				"parameters": [
+					{
+						"name": "elapsed",
+						"type": "dword",
+						"value": "16777216"
+					}
+				]
+			},
+			{
+				"name": "timeGetTime",
+				"info": "Checks delay after program was started using winmm!timeGetTime().",
+				"parameters": [
+					{
+						"name": "elapsed",
+						"type": "dword",
+						"value": "16777216"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Process Memory Checks",
+		"subgroups": [
+			{
+				"name": "Breakpoints",
+				"subgroups": [
+					{
+						"name": "ScanINT3",
+						"tags": [ "break" ],
+						"info": "Checks if the INT3 instruction is placed at the return address."
+					},
+					{
+						"name": "AntiStepOver",
+						"tags": [ "break", "trace" ],
+						"info": "Patches return address first byte with NOP if the INT3 instruction is placed there."
+					},
+					{
+						"name": "AntiStepOverReadFile",
+						"tags": [ "break", "trace" ],
+						"info": "Patches return address first byte with NOP using kernel32!ReadFile() if the INT3 instruction is placed there."
+					},
+					{
+						"name": "AntiStepOverWriteProcessMemory",
+						"tags": [ "break" ],
+						"info": "Patches return address first byte with NOP using kernel32!WriteProcessMemory() if the INT3 instruction is placed there."
+					},
+					{
+						"name": "Toolhelp32ReadProcessMemory",
+						"tags": [ "break" ],
+						"info": "Checks if the INT3 instruction is placed at the return address using kernel32!Toolhelp32ReadProcessMemory()."
+					},
+					{
+						"name": "MemoryBreakpoints",
+						"tags": [ "break" ],
+						"info": "Allocates a buffer with PAGE_GUARD page protection which contain only RET instruction. If the program is debugged in OllyDbg or ImmunityDebugger and the allocated buffer is executed the control will be passed to address on the stack."
+					},
+					{
+						"name": "HardwareBreakpoints",
+						"tags": [ "break" ],
+						"info": "Checks debug registers DR0, DR1, DR2 and DR3 from the thread context."
+					}
+				]
+			},
+			{
+				"name": "Other",
+				"subgroups": [
+					{
+						"name": "NtQueryVirtualMemory",
+						"tags": [ "break" ],
+						"info": "Queries Working Set of the current process using ntdll::NtQueryVirtualMemory() and checks Shared and ShareCount fields of the Working Set Block for the page with code. If there were software breakpoints in the code these fields must not be set."
+					},
+					{
+						"name": "FunctionPatch",
+						"tags": [ "break" ],
+						"info": "Verifies if the function kernel32!IsDebuggerPresent() was modified (e.g. a breakpoint is set to this function) by comparing its bytes with the same function in other processes."
+					},
+					{
+						"name": "DbgBreakPointPatch",
+						"tags": [ "attach", "crash" ],
+						"info": "Erases the breakpoint inside ntdll!DbgBreakPrint(). The debugger won't break in and the thread will exit.",
+						"parameters": [
+							{
+								"name": "attach_tmeout",
+								"type": "dword",
+								"value": "0"
+							}
+						]
+					},
+					{
+						"name": "DbgUiRemoteBreakinPatch",
+						"tags": [ "attach", "crash" ],
+						"info": "Patches kernel32!DebugActiveProcess() to make it call kernel32!TerminateProcess(). The application will exit if a debugger attaches.",
+						"parameters": [
+							{
+								"name": "attach_tmeout",
+								"type": "dword",
+								"value": "0"
+							}
+						]
+					},
+					{
+						"name": "CodeChecksum",
+						"tags": [ "break" ],
+						"info": "Verifies the CRC32 checksum of one function to detect software breakpoints, debugger's step-overs, functions inline hooks or data modification."
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "Checks with assembly instructions",
+		"subgroups": [
+			{
+				"name": "INT3",
+				"info": "Checks if the exception handler will be called when the instruction INT3 is executed."
+			},
+			{
+				"name": "INT3Long",
+				"info": "Checks if the exception handler will be called when the long form of the instruction INT3 is executed."
+			},
+			{
+				"name": "INT2D",
+				"info": "When the instruction INT2D is executed the exception EXCEPTION_BREAKPOINT is raised but EIP register will be used as an exception address and the EIP value will be incremented. If the control is passed to the registered exception handler then the debugger is not present."
+			},
+			{
+				"name": "ICE",
+				"info": "ICE is an undocumented instruction. It can be used to detect if the program is traced. If ICE instruction is executed without a debugger the EXCEPTION_SINGLE_STEP exception will be raised."
+			},
+			{
+				"name": "StackSegmentRegister",
+				"tags": [ "trace" ],
+				"info": "The trick consists of tracing over the following sequence of assembly instructions: push ss / pop ss / pushf. After single-stepping in a debugger through this code the Trap Flag will be set."
+			},
+			{
+				"name": "InstructionCounting",
+				"info": "The idea of this trick is to set hardware breakpoints to each instruction in some predefined sequence. Execution of the instruction with a hardware breakpoint on it raises EXCEPTION_SINGLE_STEP exception which can be caught by a vectored exception handler. In the exception handler we increment a counter and EIP. After the sequence is finished and the counter is not equal to the length of our sequence then the debugger is present."
+			},
+			{
+				"name": "PopfAndTrapFlag",
+				"tags": [ "trace" ],
+				"info": "When Trap Flag is set the exception SINGLE_STEP is raised. However if we traced the code Trap Register will be cleared by a debugger so we won't see the exception."
+			},
+			{
+				"name": "InstructionPrefixes",
+				"tags": [ "trace" ],
+				"info": "This trick abuses the way how some debuggers handle instruction prefixes. If we execute code F3 64 F1 in OllyDbg it will skip the next byte after stepping to the first byte F3 and execute F1 as INT1 instruction. If the debugger is not present then the exception will be raised."
+			},
+			{
+				"name": "DebugRegistersModification",
+				"info": "Shows an example how to unset debug registers in an exception handler."
+			}
+		]
+	},
+	{
+		"name": "Direct debugger interaction",
+		"subgroups": [
+			{
+				"name": "SelfDebugging",
+				"info": "Runs a new process which tries to attach as a debugger to its parent using kernel32!DebugActiveProcess(). As only one debugger can be attached to a process at a time a failure to attach to the process might indicate the presence of another debugger."
+			},
+			{
+				"name": "GenerateConsoleCtrlEvent",
+				"info": "Generates a Ctrl+C event using kernel32!GenerateConsoleCtrlEvent(). If a console process is being debugged and CTRL+C signals have not been disabled, the system generates a DBG_CONTROL_C exception."
+			},
+			{
+				"name": "BlockInput",
+				"tags": [ "admin" ],
+				"info": "The function user32!BlockInput() allows the input to be blocked only once. The second call will return FALSE. If the function returns TRUE regardless of the input it may indicate that some hooking solution is present."
+			},
+			{
+				"name": "NtSetInformationThread",
+				"tags": [ "break", "trace", "crash" ],
+				"info": "Function ntdll!NtSetInformationThread() can be used to hide a thread from a debugger. It is possible with a help of undocumented value THREAD_INFORMATION_CLASS::ThreadHideFromDebugger (0x11). But if there is a breakpoint in the hidden thread or if we hide the main thread from the debugger the process will crash and the debugger will stuck."
+			},
+			{
+				"name": "SuspendThread",
+				"tags": [ "crash" ],
+				"info": "Enumerates all top-level windows on the screen (using user32!EnumWindows()), searches the window which process ID is the ID of the parent process (using user32!GetWindowThreadProcessId()) and checks the title of this window (by user32!GetWindowTextW()). If the window title of the parent process looks like a debugger title it suspends the owning thread using kernel32!SuspendThread()."
+			}
+		]
+	},
+	{
+		"name": "Misc",
+		"subgroups": [
+			{
+				"name": "FindWindow",
+				"info": "Enumerates window classes in the system and compares them with known windows classes of debuggers."
+			},
+			{
+				"name": "ParentProcessCheck_NtQueryInformationProcess",
+				"info": "Verifies that the process is created by the shell process. Normally a user-mode process is executed by clicking two times on a file icon. Its parent process must be \"explorer.exe\". This method obtainins explorer window handle using user32!GetShellWindow() and its PID using user32!GetWindowThreadProcessId(). The parent PID is obtained from PROCESS_BASIC_INFORMATION structure using ntdll!NtQueryInformationProcess() with the ProcessBasicInformation class."
+			},
+			{
+				"name": "ParentProcessCheck_CreateToolhelp32Snapshot",
+				"info": "Verifies that the parent process name does not look like a debugger. The parent process ID and the parent process name are obtained using kernel32!CreateToolhelp32Snapshot() and kernel32!Process32Next() functions."
+			},
+			{
+				"name": "Selectors",
+				"tags": [ "trace" ],
+				"info": "Uses GS selector register to detect that the process is being traced."
+			},
+			{
+				"name": "DbgPrint",
+				"info": "Generates DBG_PRINTEXCEPTION_C exception. If a program is executed with an attached debugger then the debugger will handle this exception. But is no debugger is present and an exception handler is registered this exception will be caught by the exception handler."
+			},
+			{
+				"name": "DbgSetDebugFilterState",
+				"tags": [ "admin" ],
+				"info": "If the process has debug priveleges then the function ntdll!NtSetDebugFilterState() will succeed. Works in presence of a kernel mode debuggers. However the functions can also succeed because of side-effects of some user-mode debuggers."
+			}
+		]
+	}
+]

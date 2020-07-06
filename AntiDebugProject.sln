@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "not_suspicious", "src\not_suspicious\not_suspicious.vcxproj", "{4A39C662-9C29-4B7C-8038-E88482F7509C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{EDA94777-72C7-4413-824C-57B5D42FC85E}"
+	ProjectSection(SolutionItems) = preProject
+		include\config.h = include\config.h
+		include\interprocess.h = include\interprocess.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{41113844-038E-4174-9EF9-C0493A5949B3}"
+	ProjectSection(SolutionItems) = preProject
+		config\config.json = config\config.json
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShowStopper", "src\ShowStopper\ShowStopper.vcxproj", "{A1F3D354-B653-4BD7-9B9D-7F016CDCD7EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A39C662-9C29-4B7C-8038-E88482F7509C}.Debug|x86.ActiveCfg = Debug|Win32
+		{4A39C662-9C29-4B7C-8038-E88482F7509C}.Debug|x86.Build.0 = Debug|Win32
+		{4A39C662-9C29-4B7C-8038-E88482F7509C}.Release|x86.ActiveCfg = Release|Win32
+		{4A39C662-9C29-4B7C-8038-E88482F7509C}.Release|x86.Build.0 = Release|Win32
+		{A1F3D354-B653-4BD7-9B9D-7F016CDCD7EE}.Debug|x86.ActiveCfg = Debug|Win32
+		{A1F3D354-B653-4BD7-9B9D-7F016CDCD7EE}.Debug|x86.Build.0 = Debug|Win32
+		{A1F3D354-B653-4BD7-9B9D-7F016CDCD7EE}.Release|x86.ActiveCfg = Release|Win32
+		{A1F3D354-B653-4BD7-9B9D-7F016CDCD7EE}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F395AC36-9D28-4A87-83C3-655627E393EB}
+	EndGlobalSection
+EndGlobal

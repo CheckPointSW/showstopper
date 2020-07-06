@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Techniques">
+      <UniqueIdentifier>{0fb7f508-4e4d-4bd0-9e04-52ab63ec8261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd_party">
+      <UniqueIdentifier>{7566788e-5074-4962-8ec4-13033ca86f15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd_party\hwbrk">
+      <UniqueIdentifier>{82fbe927-8020-4817-adbe-4e47cab35796}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="not_suspicious.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_Assembler.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_DebugFlags.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_DirectDbgInteraction.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_Exceptions.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_HandlesValidation.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_MemoryChecks.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_Misc.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique_Timing.cpp">
+      <Filter>Techniques</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebuggerFugitive.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NtDll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProcessHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Technique.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UiProxy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\3rd_party\hwbrk\hwbrk.cpp">
+      <Filter>3rd_party\hwbrk</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Technique_Assembler.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_DebugFlags.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_DirectDbgInteraction.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_Exceptions.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_HandlesValidation.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_MemoryChecks.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_Misc.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique_Timing.h">
+      <Filter>Techniques</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebuggerFugitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NtDll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ProcessHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Technique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Techniques_Def.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UiProxy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\3rd_party\hwbrk\hwbrk.h">
+      <Filter>3rd_party\hwbrk</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="not_suspicious.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
