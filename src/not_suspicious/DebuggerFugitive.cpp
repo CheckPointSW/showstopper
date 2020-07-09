@@ -172,12 +172,12 @@ bool DebuggerFugitive::CheckTags(std::list<std::string> &nodeTags)
 	return true;
 }
 
-// Dirty Hack: This function is supposed to  retrive the address of Check() method of
+// Dirty Hack: This function is supposed to retrieve the address of Check() method of
 //             an object derived from Technique class.
 //             We obtain the VTable address of the corresponding class and get the
 //             address of Check() method at hardcoded 4*sizeof(DWORD_PTR) byte.
 //             Then we check whether it is the method itself or a JMP stub.
-//             If it is a JMP to the method we compute the address from JMP instruction.
+//             If it is a JMP to the method, we compute the address from the JMP instruction.
 void *DebuggerFugitive::GetCheckAddress(void *pInstance)
 {
 	DWORD_PTR pVtable = *(DWORD_PTR *)pInstance;
