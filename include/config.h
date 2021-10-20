@@ -115,8 +115,6 @@ namespace Config
 		Selectors,
 		DbgPrint,
 		DbgSetDebugFilterState,
-		SwitchToThread,
-		TestTrick,
 
 	};
 
